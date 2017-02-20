@@ -5,18 +5,18 @@
 
     $scope.sukses = 1;
     $scope.squares = [];
-    $scope.ukuran = 9;
-    $scope.akar = 3;
+    $scope.ukuran = 4;
+    $scope.akar = 2;
     $scope.ukuran_cell = {};
 
-    for (var i = 1; i <= 6; ++i) {
+    for (var i = 1; i <= 5; ++i) {
       $scope.squares.push(i*i);
       $scope.ukuran_cell[i*i] = (Math.min(40, Math.floor(1000/(i*i))));
       if( $scope.ukuran_cell[i*i] < 40 ) $scope.ukuran_cell[i*i] = 40;
     }
 
     $scope.changed = function(){
-      $scope.ukuran = $scope.dropdown_ukuran ? $scope.dropdown_ukuran : 9;
+      $scope.ukuran = $scope.dropdown_ukuran ? $scope.dropdown_ukuran : 4;
       $scope.akar = Math.sqrt($scope.ukuran);
       $scope.m = [];
       for (var i = 0; i < $scope.ukuran; ++i) {
@@ -26,7 +26,7 @@
       };
       $scope.$applyAsync();
     }
-    
+
     $scope.changed();
 
     var beda = function(arr1, arr2)

@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pakar Sudoku</title>
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-  
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/app.css">
 </head>
 <body>
 
@@ -18,16 +17,16 @@
   <div class="container" ng-controller="sudokuController">
 
     <div class="row">
-      
+
       <div class="col-sm-12">
         <div class="text-center">
           <span>Ukuran Papan:</span>
           <select name="ukuran" class="btn btn-default" ng-model="dropdown_ukuran" ng-change="changed()">
-            <option ng-repeat="u in squares" ng-value="u" ng-bind-html="u+' x '+u" class="btn btn-default" ng-selected="u == {{9 if lokal else 4}}"></option>
+            <option ng-repeat="u in squares" ng-value="u" ng-bind-html="u+' x '+u" class="btn btn-default" ng-selected="u == 4"></option>
           </select>
         </div>
       </div> <!-- END OF UKURAN DIV -->
-  
+
       <div class="col-sm-12">
         <h4 class="text-center alert alert-info">Masalah</h4>
         <table align="center" class="table-bordered">
@@ -60,15 +59,14 @@
       </div>
 
     </div> <!-- END OF TABLE DIV -->
-    
+
     <br><div class="well text-center"> <h5></h5> </div>
-  
+
   </div>
   <!-- END OF CONTENT -->
-  
-  <script src="{{ url_for('static', filename='js/angular.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/angular-sanitize.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/'+('app2.js' if lokal else 'app3.js')) }}"></script>
 
+  <script src="/javascripts/angular.min.js"></script>
+  <script src="/javascripts/angular-sanitize.min.js"></script>
+  <script src="/javascripts/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+.cell-sudoku
+{
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0;
+}
+
+.cell-sudoku:hover
+{
+  background: #dadada;
+}

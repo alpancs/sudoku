@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="sudoku">
+<head>
+  <meta charset="utf-8">
+  <!-- If you delete this meta tag World War Z will become a reality -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pakar Sudoku</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  
+</head>
+<body>
+
+  <div class="well text-center"><h3><strong>Pakar Sudoku</strong></h3></div>
+
+  <!-- CONTENT -->
+  <div class="container" ng-controller="sudokuController">
+
+    <div class="row">
+      
+      <div class="col-sm-12">
+        <div class="text-center">
+          <span>Ukuran Papan:</span>
+          <select name="ukuran" class="btn btn-default" ng-model="dropdown_ukuran" ng-change="changed()">
+            <option ng-repeat="u in squares" ng-value="u" ng-bind-html="u+' x '+u" class="btn btn-default" ng-selected="u == {{9 if lokal else 4}}"></option>
+          </select>
+        </div>
+      </div> <!-- END OF UKURAN DIV -->
+  
+      <div class="col-sm-12">
+        <h4 class="text-center alert alert-info">Masalah</h4>
+        <table align="center" class="table-bordered">
+          <tbody>
+            <tr ng-repeat="(i,baris) in m track by $index">
+              <td ng-repeat="(j,cell) in baris track by $index">
+                <input class="cell-sudoku" ng-style="{'width': (ukuran_cell[ukuran])+'px', 'height': (ukuran_cell[ukuran])+'px', 'border-left': (j && j % akar == 0) ? 'solid 3px' : '', 'border-top': (i && i % akar == 0) ? 'solid 3px' : ''}" ng-model="m[i][j]">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-sm-12">
+        <h4 class="text-center alert" ng-class="{'alert-success': s.length && !blocking, 'alert-danger': !s.length && !blocking, 'alert-warning': blocking}" ng-bind-html="blocking ? 'Solusi Sedang Dicari...' : s.length ? 'Ada Solusi' : 'Tidak Ada Solusi :('"></h4>
+      </div>
+
+      <div class="col-sm-12" ng-repeat="(k,tabel) in s track by $index" ng-show="terlihat[k]">
+        <h4 class="text-center"> <div ng-bind-html="'Solusi '+(k+1)"> </div> </h4>
+        <table align="center" class="table-bordered" style="display:table">
+          <tbody>
+            <tr ng-repeat="(i,baris) in tabel track by $index" style="display:table">
+              <td ng-repeat="(j,cell) in baris track by $index" class="cell-sudoku" ng-class="{'alert-info': s[k][i][j] == m[i][j] }" ng-style="{'width': (ukuran_cell[ukuran])+'px', 'min-width': (ukuran_cell[ukuran])+'px', 'height': (ukuran_cell[ukuran])+'px', 'min-height': (ukuran_cell[ukuran])+'px', 'border-left': (j && j % akar == 0) ? 'solid 3px' : '', 'border-top': (i && i % akar == 0) ? 'solid 3px' : '', 'font-weight': s[k][i][j] == m[i][j] ? 'bolder' : ''}" ng-bind-html="s[k][i][j]">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="text-center"><button ng-click="terlihat.push(1)" ng-hide="terlihat[k+1]" class="btn btn-success">Solusi Lain</button></h4>
+        <hr>
+      </div>
+
+    </div> <!-- END OF TABLE DIV -->
+    
+    <br><div class="well text-center"> <h5></h5> </div>
+  
+  </div>
+  <!-- END OF CONTENT -->
+  
+  <script src="{{ url_for('static', filename='js/angular.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/angular-sanitize.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/'+('app2.js' if lokal else 'app3.js')) }}"></script>
+
+</body>
+</html>

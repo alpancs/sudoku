@@ -29,7 +29,7 @@ func newRouter() http.Handler {
 	router.Use(middleware.RequestID)
 	router.Get("/", route.Home)
 	fileServer(router, "/", http.Dir("public"))
-	// router.Post("/solve", route.Solve)
+	router.Post("/solve", route.Solve)
 	return router
 }
 
